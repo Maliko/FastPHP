@@ -10,7 +10,7 @@ namespace FastPHP\Modules\Base\Controller;
 
 class Base
 {
-    public function test() {
-        echo 'test';
+    public function index() {
+        echo 'Ich bin ein Test';
     }
 }
