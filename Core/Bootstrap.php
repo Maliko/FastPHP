@@ -26,11 +26,11 @@ class Bootstrap
 
 
         if(!is_null($aClassAction)) {
-            $sClass = (string)$aClassAction->class;
-            $sAction = (string)$aClassAction->action;
+            $sClass = (string)$aClassAction['route']->class;
+            $sAction = (string)$aClassAction['route']->action;
 
             $controller = new $sClass();
-            $controller->$sAction();
+            call_user_func_array([$controller, $sAction], $aClassAction['parameter']);
         } else {
             throw new ControllerNotFoundException();
         }

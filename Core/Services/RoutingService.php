@@ -24,14 +24,39 @@ class RoutingService
                 $aData = $configFileReader->getConfig();
 
                 foreach ($aData as $route) {
-                    if((string)$route->route === $sRoute) {
-                        return $route;
+                    $aRouteTemp = $this->buildFinalRoute($sRoute, $route->route);
+                    if($aRouteTemp['route'] === $sRoute) {
+                        return [
+                            'route'     => $route,
+                            'parameter' => $aRouteTemp['parameter']
+                        ];
                     }
                 }
             }
         }
         
         return null;
+
+    }
+
+    private function buildFinalRoute($sUrlRoute, $configRoute) {
+        $aConfigRoute = explode('/', (string)$configRoute);
+        $aUrlRoute = explode('/', $sUrlRoute);
+        $aParameter = [];
+
+        if(count($aConfigRoute) === count($aUrlRoute)) {
+            for ($i = 0; $i < count($aUrlRoute); $i++) {
+                if(substr($aConfigRoute[$i], 0, 1) == '{' && substr($aConfigRoute[$i], strlen($aConfigRoute[$i]) - 1, 1) == '}') {
+                    $aParameter[] = $aUrlRoute[$i];
+                    $aConfigRoute[$i] = $aUrlRoute[$i];
+                }
+            }
+        }
+
+        return [
+            'route'     => implode('/', $aConfigRoute),
+            'parameter' => $aParameter
+        ];
 
     }
 }

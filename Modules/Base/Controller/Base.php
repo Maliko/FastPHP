@@ -13,4 +13,8 @@ class Base
     public function index() {
         echo 'Ich bin ein Test';
     }
+
+    public function tester($iId) {
+        echo $iId;
+    }
 }

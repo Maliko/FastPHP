@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routing>
     <route>
+        <alias>start</alias>
         <route>/Start/index</route>
         <class>\FastPHP\Modules\Base\Controller\Base</class>
         <action>index</action>
+    </route>
+    <route>
+        <alias>test</alias>
+        <route>/Start/{iId}/index</route>
+        <class>\FastPHP\Modules\Base\Controller\Base</class>
+        <action>tester</action>
     </route>
 </routing>
