@@ -14,7 +14,7 @@ class Base
         echo 'Ich bin ein Test';
     }
 
-    public function tester($iId) {
-        echo $iId;
+    public function tester($iId, $test) {
+        echo $iId . ' : ' . $test;
     }
 }

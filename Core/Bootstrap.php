@@ -2,7 +2,7 @@
 
 namespace FastPHP\Core;
 
-use \FastPHP\Core\Elementary\ConfigFileReader;
+use FastPHP\Core\Elementary\ConfigFileReader;
 use FastPHP\Core\Exceptions\ControllerNotFoundException;
 use FastPHP\Core\Services\RoutingService;
 

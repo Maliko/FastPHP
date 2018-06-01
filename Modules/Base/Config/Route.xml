@@ -8,7 +8,7 @@
     </route>
     <route>
         <alias>test</alias>
-        <route>/Start/{iId}/index</route>
+        <route>/Start/{iId}/index/{test}</route>
         <class>\FastPHP\Modules\Base\Controller\Base</class>
         <action>tester</action>
     </route>

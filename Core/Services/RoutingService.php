@@ -11,6 +11,11 @@ use FastPHP\Core\Elementary\ConfigFileReader;
  */
 class RoutingService
 {
+    /**
+     * Returns the ClassAction
+     * @param string $sRoute
+     * @return array|null
+     */
     public function getClassAction($sRoute = '') {
         if(empty($sRoute)) {
             $sRoute = $_SERVER['PATH_INFO'];
