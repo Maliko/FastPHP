@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <startPage>
-        <module>Base</module>
-        <controller>Start</controller>
+        <class>\FastPHP\Modules\Base\Controller\Base</class>
         <action>index</action>
     </startPage>
     <url>http://localhost</url>

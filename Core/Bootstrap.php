@@ -18,22 +18,44 @@ class Bootstrap
      * bootstrap function in your Controller
      */
     public function init() {
-        $configFileReader = new ConfigFileReader('Config/Config.xml');
-        $configFileReader->getConfig();
 
-        $routingService = new RoutingService();
-        $aClassAction = $routingService->getClassAction();
+        try {
+            $configFileReader = new ConfigFileReader('Config/Config.xml');
+            $baseConfig = $configFileReader->getConfig();
 
+            $routingService = new RoutingService();
+            $aClassAction = $routingService->getClassAction();
 
-        if(!is_null($aClassAction)) {
-            $sClass = (string)$aClassAction['route']->class;
-            $sAction = (string)$aClassAction['route']->action;
+            if(!is_null($aClassAction) || !is_null($baseConfig)) {
+                if($aClassAction == -1) {
+                    throw  new ControllerNotFoundException();
+                }
 
-            $controller = new $sClass();
-            call_user_func_array([$controller, $sAction], $aClassAction['parameter']);
-        } else {
-            throw new ControllerNotFoundException();
+                if(!is_null($aClassAction)) {
+                    $sClass = (string)$aClassAction['route']->class;
+                    $sAction = (string)$aClassAction['route']->action;
+                    $aParameter = $aClassAction['parameter'];
+                } else {
+                    $sClass = (string)$baseConfig->startPage->class;
+                    $sAction = (string)$baseConfig->startPage->action;
+
+                    if(isset($baseConfig->startPage->parameter)) {
+                        $aParameter = (array)$baseConfig->startPage->parameter;
+                    } else {
+                        $aParameter = [];
+                    }
+
+                }
+
+                $controller = new $sClass();
+                call_user_func_array([$controller, $sAction], $aParameter);
+            } else {
+                throw new ControllerNotFoundException();
+            }
+        } catch (ControllerNotFoundException $e) {
+            echo 'The Page you are searching could not found. Apologise for this.';
         }
+
 
 
     }

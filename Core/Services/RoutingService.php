@@ -14,11 +14,16 @@ class RoutingService
     /**
      * Returns the ClassAction
      * @param string $sRoute
-     * @return array|null
+     * @return array|null|int
      */
     public function getClassAction($sRoute = '') {
         if(empty($sRoute)) {
-            $sRoute = $_SERVER['PATH_INFO'];
+            if(array_key_exists('PATH_INFO', $_SERVER)) {
+                $sRoute = $_SERVER['PATH_INFO'];
+            } else {
+                $sRoute = '';
+            }
+
         }
 
         $directory = new \DirectoryIterator('Modules');
@@ -39,8 +44,13 @@ class RoutingService
                 }
             }
         }
-        
-        return null;
+
+        if(empty($sRoute)) {
+            return null;
+        } else {
+            return -1;
+        }
+
 
     }
 
