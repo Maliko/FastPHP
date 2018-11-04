@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule>
+    <pattern>{{= * }}</pattern>
+    <translation>
+        <start><![CDATA[<?= ]]></start>
+        <end><![CDATA[?>]]></end>
+    </translation>
+</rule>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?= 'Halllo' ?></title>
+    <title><?= 'Hallo' ?></title>
 </head>
 <body>
-    Ich bin da.
+    Ich bin da.<br />
 </body>
 </html>

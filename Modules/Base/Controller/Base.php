@@ -8,10 +8,19 @@
 
 namespace FastPHP\Modules\Base\Controller;
 
-class Base
+use FastPHP\Core\BaseClasses\Controller;
+
+class Base extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct('Base');
+    }
+
     public function index() {
-        echo 'Ich bin ein Test';
+        $this->view->render('base/index', [
+            'test' => 'Dies ist ein Test'
+        ]);
     }
 
     public function tester($iId, $test) {
