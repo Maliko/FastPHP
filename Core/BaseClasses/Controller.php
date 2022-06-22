@@ -3,7 +3,6 @@
 namespace FastPHP\Core\BaseClasses;
 
 use FastPHP\Core\Services\ViewService;
-
 class Controller {
 
     protected $view;

@@ -9,6 +9,8 @@
 namespace FastPHP\Modules\Base\Controller;
 
 use FastPHP\Core\BaseClasses\Controller;
+use FastPHP\Core\Network\Request;
+use FastPHP\Modules\Base\Service\SampleService;
 
 class Base extends Controller
 {
@@ -17,9 +19,9 @@ class Base extends Controller
         parent::__construct('Base');
     }
 
-    public function index() {
+    public function index(SampleService $service) {        
         $this->view->render('base/index', [
-            'test' => 'Dies ist ein Test'
+            'test' => $service->getValue()
         ]);
     }
 

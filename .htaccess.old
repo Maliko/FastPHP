@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /fastphp/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+?)/?$ ?cmd=$1 [QSA,L]

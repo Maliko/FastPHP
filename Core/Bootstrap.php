@@ -5,6 +5,7 @@ namespace FastPHP\Core;
 use FastPHP\Core\Elementary\ConfigFileReader;
 use FastPHP\Core\Exceptions\ControllerNotFoundException;
 use FastPHP\Core\Services\RoutingService;
+use FastPHP\Core\Services\DIService;
 
 /**
  * Class Bootstrap
@@ -46,8 +47,19 @@ class Bootstrap
                     }
 
                 }
-
+                
+                $di = new DIService();
+                
+                if($di->hasFunctionDI($sClass, $sAction)) {
+                    $dependencies = $di->getDependencyNames($sClass, $sAction);
+                    
+                    foreach ($dependencies as $dependency) {
+                        $aParameter[] = $di->getDependencyObject($dependency);
+                    }
+                }
+                
                 $controller = new $sClass();
+                
                 call_user_func_array([$controller, $sAction], $aParameter);
             } else {
                 throw new ControllerNotFoundException();

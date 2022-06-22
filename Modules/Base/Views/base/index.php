@@ -4,6 +4,6 @@
     <title><?= 'Hallo' ?></title>
 </head>
 <body>
-    Ich bin da.<br />
+    <?= $test ?><br />
 </body>
 </html>

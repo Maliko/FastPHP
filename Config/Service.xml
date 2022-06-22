@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+    <service>
+        <name>Request</name>
+        <namespace>FastPHP\Core\Network\Request</namespace>
+    </service> 
+    <service>
+        <name>Response</name>
+        <namespace>FastPHP\Core\Network\Response</namespace>
+    </service>   
+</services>

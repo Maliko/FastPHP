@@ -2,10 +2,9 @@
 
 namespace FastPHP\Core\Exceptions;
 
-
 use Throwable;
 
-class ControllerNotFoundException extends \Exception
+class ConfigException extends \Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
