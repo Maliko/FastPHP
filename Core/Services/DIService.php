@@ -53,10 +53,12 @@ class DIService {
         foreach ($parameters as $parameter) {
             $type = $parameter->getType();
             
-            foreach ($this->_dependencies as $dependencyConfig) {
-                foreach ($dependencyConfig as $dependency) {
-                    if($type->getName() == $dependency->namespace) {
-                        $result[] = (string)$dependency->namespace;
+            if($type != null) {
+                foreach ($this->_dependencies as $dependencyConfig) {
+                    foreach ($dependencyConfig as $dependency) {
+                        if($type->getName() == $dependency->namespace) {
+                            $result[] = (string)$dependency->namespace;
+                        }
                     }
                 }
             }
@@ -69,20 +71,25 @@ class DIService {
         $class = new \ReflectionClass($className);
         $func = $class->getMethod($function);
         $args = $func->getParameters();
+        $noDI = 0;
         
         foreach ($args as $arg) {
             $type = $arg->getType();
             
-            foreach ($this->_dependencies as $dependencyConfig) {
-                foreach ($dependencyConfig as $dependency) {
-                    if($type->getName() == $dependency->namespace) {
-                        return true;
+            if($type != null) {
+                foreach ($this->_dependencies as $dependencyConfig) {
+                    foreach ($dependencyConfig as $dependency) {
+                        if($type != null && $type->getName() == $dependency->namespace) {
+                            return true;
+                        }
                     }
                 }
+            } else {
+                $noDI++;
             }
         }
         
-        if(count($args) === 0) {
+        if(count($args) === 0 || $noDI == count($args)) {
             return false;
         } else {
             throw new ServiceNotFoundException("The called Function uses a Service that's not declared. Please check your Service-Config-Files.");

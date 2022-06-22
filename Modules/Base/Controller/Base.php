@@ -25,7 +25,9 @@ class Base extends Controller
         ]);
     }
 
-    public function tester($iId, $test) {
+    public function tester(SampleService $service, $iId, $test) {
         echo $iId . ' : ' . $test;
+        echo "<br>";
+        echo $service->getValue();
     }
 }

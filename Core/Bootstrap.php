@@ -49,16 +49,19 @@ class Bootstrap
                 }
                 
                 $di = new DIService();
+                $parameterDI = array();
                 
                 if($di->hasFunctionDI($sClass, $sAction)) {
                     $dependencies = $di->getDependencyNames($sClass, $sAction);
                     
                     foreach ($dependencies as $dependency) {
-                        $aParameter[] = $di->getDependencyObject($dependency);
+                        $parameterDI[] = $di->getDependencyObject($dependency);
                     }
                 }
                 
                 $controller = new $sClass();
+                
+                $aParameter = array_merge($parameterDI, $aParameter);
                 
                 call_user_func_array([$controller, $sAction], $aParameter);
             } else {
